@@ -10,6 +10,9 @@
  * 遇到 nums[i] == val 时，把它后面的元素整体左移一位，
  * 有效长度 numsSize 减一，并且 i-- 回退，重新检查当前位置。
  *   时间 O(n^2)，空间 O(1)
+ * ── 解法二：双指针──
+ *fast 负责筛选，slow 负责接收。fast 只把"合格的"交给 slow，不合格的直接跳过。
+ *时间O(n)
  */
 int removeElement(int* nums, int numsSize, int val) {
     for (int i = 0;i < numsSize;i++)
@@ -25,4 +28,16 @@ int removeElement(int* nums, int numsSize, int val) {
         }
     }
     return numsSize ;
+}
+int removeElement_brute(int* nums, int numsSize, int val) {
+    int slow = 0;
+    for (int fast = 0;fast < numsSize;fast++)
+    {
+        if (nums[fast] != val)
+        {
+            nums[slow] = nums[fast];
+        }
+        slow++;
+    }
+    return slow;
 }
